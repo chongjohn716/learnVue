@@ -2,22 +2,22 @@
 
 // these helpers produces better vm code in JS engines due to their
 // explicitness and function inlining
-export function isUndef (v: any): boolean %checks {
+export function isUndef (v: any): boolean {
   return v === undefined || v === null
 }
 
-export function isDef (v: any): boolean %checks {
+export function isDef (v: any): boolean {
   return v !== undefined && v !== null
 }
 
-export function isTrue (v: any): boolean %checks {
+export function isTrue (v: any): boolean {
   return v === true
 }
 
 /**
  * Check if value is primitive
  */
-export function isPrimitive (value: any): boolean %checks {
+export function isPrimitive (value: any): boolean {
   return typeof value === 'string' || typeof value === 'number'
 }
 
@@ -26,7 +26,7 @@ export function isPrimitive (value: any): boolean %checks {
  * Objects from primitive values when we know the value
  * is a JSON-compliant type.
  */
-export function isObject (obj: mixed): boolean %checks {
+export function isObject (obj: mixed): boolean {
   return obj !== null && typeof obj === 'object'
 }
 
@@ -36,7 +36,7 @@ const _toString = Object.prototype.toString
  * Strict object type check. Only returns true
  * for plain JavaScript objects.
  */
- /*对对象类型进行严格检查，只有当对象是纯javascript对象的时候返回true*/
+/*对对象类型进行严格检查，只有当对象是纯javascript对象的时候返回true */
 export function isPlainObject (obj: any): boolean {
   return _toString.call(obj) === '[object Object]'
 }
@@ -48,7 +48,7 @@ export function isRegExp (v: any): boolean {
 /**
  * Convert a value to a string that is actually rendered.
  */
- /*将val转化成字符串*/
+/*将val转化成字符串 */
 export function toString (val: any): string {
   return val == null
     ? ''
@@ -61,7 +61,7 @@ export function toString (val: any): string {
  * Convert a input value to a number for persistence.
  * If the conversion fails, return original string.
  */
- /*将字符串转化为数字，如果转换失败会返回原字符串*/
+/*将字符串转化为数字，如果转换失败会返回原字符串 */
 export function toNumber (val: string): number | string {
   const n = parseFloat(val)
   return isNaN(n) ? val : n
@@ -71,21 +71,19 @@ export function toNumber (val: string): number | string {
  * Make a map and return a function for checking if a key
  * is in that map.
  */
- /*
+/*
 返回一个函数用以检测是否一个key值存在这个函数中
 比如str = "a, b, c"
 则返回 (key) => {
-  return map[key];
+ return map[key];
 }
 map为{
-  a: true,
-  b: true,
-  c: true
+ a: true,
+ b: true,
+ c: true
 }
 存在expectsLowerCase参数的时候会将所有的参数转化成小写
- */
-}
-}
+*/
 export function makeMap (
   str: string,
   expectsLowerCase?: boolean
@@ -128,7 +126,7 @@ export function hasOwn (obj: Object | Array<*>, key: string): boolean {
 /**
  * Create a cached version of a pure function.
  */
- /*根据str得到fn(str)的结果，但是这个结果会被闭包中的cache缓存起来，下一次如果是同样的str则不需要经过fn(str)重新计算，而是直接得到结果*/
+/* 根据str得到fn(str)的结果，但是这个结果会被闭包中的cache缓存起来，下一次如果是同样的str则不需要经过fn(str)重新计算，而是直接得到结果*/
 export function cached<F: Function> (fn: F): F {
   const cache = Object.create(null)
   return (function cachedFn (str: string) {
@@ -140,7 +138,7 @@ export function cached<F: Function> (fn: F): F {
 /**
  * Camelize a hyphen-delimited string.
  */
- /*将原本用-连接的字符串变成驼峰 aaa-bbb-ccc => aaaBbbCcc*/
+/* 将原本用-连接的字符串变成驼峰 aaa-bbb-ccc => aaaBbbCcc*/
 const camelizeRE = /-(\w)/g
 export const camelize = cached((str: string): string => {
   return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
@@ -149,7 +147,7 @@ export const camelize = cached((str: string): string => {
 /**
  * Capitalize a string.
  */
- /*首字母转大写*/
+/*首字母转大写 */
 export const capitalize = cached((str: string): string => {
   return str.charAt(0).toUpperCase() + str.slice(1)
 })
@@ -157,7 +155,7 @@ export const capitalize = cached((str: string): string => {
 /**
  * Hyphenate a camelCase string.
  */
- /*连接一个camelCase字符串。*/
+/*连接一个camelCase字符串。 */
 const hyphenateRE = /([^-])([A-Z])/g
 export const hyphenate = cached((str: string): string => {
   return str
@@ -186,7 +184,7 @@ export function bind (fn: Function, ctx: Object): Function {
 /**
  * Convert an Array-like object to a real Array.
  */
- /*将类数组的对象转换成数组*/
+/* 将类数组的对象转换成数组*/
 export function toArray (list: any, start?: number): Array<any> {
   start = start || 0
   let i = list.length - start
@@ -200,7 +198,7 @@ export function toArray (list: any, start?: number): Array<any> {
 /**
  * Mix properties into target object.
  */
- /*将_from的属性混合（会覆盖）to对象中*/
+/*将_from的属性混合（会覆盖）to对象中 */
 export function extend (to: Object, _from: ?Object): Object {
   for (const key in _from) {
     to[key] = _from[key]
@@ -211,7 +209,7 @@ export function extend (to: Object, _from: ?Object): Object {
 /**
  * Merge an Array of Objects into a single Object.
  */
- /*合并Array数组中的每一个对象到一个新的Object中*/
+/* 合并Array数组中的每一个对象到一个新的Object中*/
 export function toObject (arr: Array<any>): Object {
   const res = {}
   for (let i = 0; i < arr.length; i++) {
@@ -225,7 +223,7 @@ export function toObject (arr: Array<any>): Object {
 /**
  * Perform no operation.
  */
-export function noop () {}
+export function noop () { }
 
 /**
  * Always return false.
@@ -250,7 +248,7 @@ export function genStaticKeys (modules: Array<ModuleOptions>): string {
  * Check if two values are loosely equal - that is,
  * if they are plain objects, do they have the same shape?
  */
- /*检测两个变量是否相等*/
+/* 检测两个变量是否相等*/
 export function looseEqual (a: mixed, b: mixed): boolean {
   const isObjectA = isObject(a)
   const isObjectB = isObject(b)
@@ -268,7 +266,7 @@ export function looseEqual (a: mixed, b: mixed): boolean {
   }
 }
 
-/*检测arr数组中是否包含与val变量相等的项*/
+/* 检测arr数组中是否包含与val变量相等的项*/
 export function looseIndexOf (arr: Array<mixed>, val: mixed): number {
   for (let i = 0; i < arr.length; i++) {
     if (looseEqual(arr[i], val)) return i

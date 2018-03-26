@@ -30,7 +30,7 @@ if (process.env.NODE_ENV !== 'production') {
     const isBuiltInModifier = makeMap('stop,prevent,self,ctrl,shift,alt,meta')
     /*为config.keyCodes设置一个代理，在set赋值的时候先从isBuiltInModifier里检查，不存在再赋值*/
     config.keyCodes = new Proxy(config.keyCodes, {
-      set (target, key, value) {
+      set(target, key, value) {
         if (isBuiltInModifier(key)) {
           warn(`Avoid overwriting built-in modifier in config.keyCodes: .${key}`)
           return false
@@ -43,7 +43,7 @@ if (process.env.NODE_ENV !== 'production') {
   }
 
   const hasHandler = {
-    has (target, key) {
+    has(target, key) {
       const has = key in target
       const isAllowed = allowedGlobals(key) || key.charAt(0) === '_'
       if (!has && !isAllowed) {
@@ -54,15 +54,15 @@ if (process.env.NODE_ENV !== 'production') {
   }
 
   const getHandler = {
-    get (target, key) {
+    get(target, key) {
       if (typeof key === 'string' && !(key in target)) {
         warnNonPresent(target, key)
       }
       return target[key]
     }
   }
-
-  initProxy = function initProxy (vm) {
+  // TODO:
+  initProxy = function initProxy(vm) {
     if (hasProxy) {
       // determine which proxy handler to use
       const options = vm.$options

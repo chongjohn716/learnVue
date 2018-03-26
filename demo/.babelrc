@@ -16,9 +16,11 @@
     "stage-2"
   ],
   "plugins": [
-    "transform-flow-strip-types",
     "transform-vue-jsx",
-    "transform-runtime"
+    "transform-runtime",
+    "transform-class-properties",
+    "syntax-flow",
+    "transform-flow-strip-types"
   ],
   "env": {
     "test": {

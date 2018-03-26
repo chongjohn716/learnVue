@@ -13,9 +13,7 @@
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
     "build": "node build/build.js"
   },
-  "dependencies": {
-    "vue-router": "^3.0.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
@@ -24,7 +22,9 @@
     "babel-jest": "^21.0.2",
     "babel-loader": "^7.1.1",
     "babel-plugin-dynamic-import-node": "^1.2.0",
+    "babel-plugin-syntax-flow": "^6.18.0",
     "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-plugin-transform-runtime": "^6.22.0",

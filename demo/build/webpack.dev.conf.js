@@ -68,7 +68,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   ],
   resolve: {
     alias: {
-      "vue$": path.resolve(__dirname, '../vue-src/platforms/web/runtime-with-compiler.js')
+      "vue$": path.resolve(__dirname, '../src/vue-src'),
+      "compiler": path.resolve(__dirname, '../src/vue-src/compiler'),
+      "shared": path.resolve(__dirname, '../src/vue-src/shared'),
+      "core": path.resolve(__dirname, '../src/vue-src/core'),
+      "web": path.resolve(__dirname, '../src/vue-src/platforms/web')
     }
   }
 })
