@@ -23,7 +23,7 @@ const ALWAYS_NORMALIZE = 2
 
 // wrapper function for providing a more flexible interface
 // without getting yelled at by flow
-export function createElement (
+export function createElement(
   context: Component,
   tag: any,
   data: any,
@@ -46,7 +46,7 @@ export function createElement (
 }
 
 /*创建VNode节点*/
-export function _createElement (
+export function _createElement(
   context: Component,
   tag?: string | Class<Component> | Function | Object,
   data?: VNodeData,
@@ -59,11 +59,11 @@ export function _createElement (
     那么创建一个空节点
   */
   if (isDef(data) && isDef((data: any).__ob__)) {
-    process.env.NODE_ENV !== 'production' && warn(
-      `Avoid using observed data object as vnode data: ${JSON.stringify(data)}\n` +
-      'Always create fresh vnode data objects in each render!',
-      context
-    )
+    // process.env.NODE_ENV !== 'production' && warn(
+    //   `Avoid using observed data object as vnode data: ${JSON.stringify(data)}\n` +
+    //   'Always create fresh vnode data objects in each render!',
+    //   context
+    // )
     return createEmptyVNode()
   }
   /*如果tag不存在也是创建一个空节点*/
@@ -74,7 +74,7 @@ export function _createElement (
   // support single function children as default scoped slot
   /*默认默认作用域插槽*/
   if (Array.isArray(children) &&
-      typeof children[0] === 'function') {
+    typeof children[0] === 'function') {
     data = data || {}
     data.scopedSlots = { default: children[0] }
     children.length = 0
@@ -126,7 +126,7 @@ export function _createElement (
   }
 }
 /*Github:https://github.com/answershuto*/
-function applyNS (vnode, ns) {
+function applyNS(vnode, ns) {
   vnode.ns = ns
   if (vnode.tag === 'foreignObject') {
     // use default namespace inside foreignObject

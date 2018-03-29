@@ -180,6 +180,7 @@ export function defineReactive (
   const setter = property && property.set
 
   /*对象的子对象递归进行observe并返回子节点的Observer对象*/
+  // TODO
   let childOb = observe(val)
   Object.defineProperty(obj, key, {
     enumerable: true,

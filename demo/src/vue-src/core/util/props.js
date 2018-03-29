@@ -26,10 +26,13 @@ export function validateProp (
   let value = propsData[key]
   // handle boolean props
   /*处理bool类型的属性*/
-  if (isType(Boolean, prop.type)) {
+  if (isType(Boolean, prop.type)) { 
     /*当父组件没有传入prop并且default中也不存在该prop时，赋值为false*/
     if (absent && !hasOwn(prop, 'default')) {
       value = false
+      // TODO: !isType(String, prop.type)!isType(String, prop.type) 处理多种类型
+      // type: [Boolean, String]
+      // 处理 <comp disabled /> 这种情况
     } else if (!isType(String, prop.type) && (value === '' || value === hyphenate(key))) {
       value = true
     }
@@ -120,9 +123,13 @@ function assertProp (
     if (!Array.isArray(type)) {
       type = [type]
     }
+    // for (let i = 0; i < type.length && !valid; i++) {
+    // !valid: valid 为 true 时跳出循环
+    // 即只需满足一种类型就跳出循环
     for (let i = 0; i < type.length && !valid; i++) {
       const assertedType = assertType(value, type[i])
       expectedTypes.push(assertedType.expectedType || '')
+      // TODO: 
       valid = assertedType.valid
     }
   }

@@ -13,7 +13,7 @@ import { extend, mergeOptions, formatComponentName } from '../util/index'
 let uid = 0
 
 /*initMixin就做了一件事情，在Vue的原型上增加_init方法，构造Vue实例的时候会调用这个_init方法来初始化Vue实例*/
-export function initMixin (Vue: Class<Component>) {
+export function initMixin(Vue: Class<Component>) {
   Vue.prototype._init = function (options?: Object) {
     const vm: Component = this
     // a uid
@@ -55,7 +55,7 @@ export function initMixin (Vue: Class<Component>) {
     initLifecycle(vm)
     /*初始化事件*/
     initEvents(vm)
-    /*初始化render*/
+    /*初始化 render */
     initRender(vm)
     /*调用beforeCreate钩子函数并且触发beforeCreate钩子事件*/
     callHook(vm, 'beforeCreate')
@@ -81,7 +81,7 @@ export function initMixin (Vue: Class<Component>) {
   }
 }
 
-function initInternalComponent (vm: Component, options: InternalComponentOptions) {
+function initInternalComponent(vm: Component, options: InternalComponentOptions) {
   const opts = vm.$options = Object.create(vm.constructor.options)
   // doing this because it's faster than dynamic enumeration.
   opts.parent = options.parent
@@ -98,7 +98,7 @@ function initInternalComponent (vm: Component, options: InternalComponentOptions
   }
 }
 
-export function resolveConstructorOptions (Ctor: Class<Component>) {
+export function resolveConstructorOptions(Ctor: Class<Component>) {
   let options = Ctor.options
   /*如果存在父类的时候*/
   if (Ctor.super) {
@@ -129,7 +129,7 @@ export function resolveConstructorOptions (Ctor: Class<Component>) {
   return options
 }
 
-function resolveModifiedOptions (Ctor: Class<Component>): ?Object {
+function resolveModifiedOptions(Ctor: Class<Component>): ?Object {
   let modified
   const latest = Ctor.options
   const extended = Ctor.extendOptions
@@ -143,7 +143,7 @@ function resolveModifiedOptions (Ctor: Class<Component>): ?Object {
   return modified
 }
 
-function dedupe (latest, extended, sealed) {
+function dedupe(latest, extended, sealed) {
   // compare latest and sealed to ensure lifecycle hooks won't be duplicated
   // between merges
   if (Array.isArray(latest)) {

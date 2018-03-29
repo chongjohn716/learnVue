@@ -13,8 +13,16 @@ export default {
   components: {
     HelloWorld
   },
+  props: {
+    aaa: {
+      type: [Boolean, String],
+      default: true
+    }
+  },
   created () {
-    console.log('asdf')
+    // this.$on('hook:mounted', () => {
+    //   console.log('123')
+    // })
   }
 }
 </script>
