@@ -329,6 +329,8 @@ export function callHook (vm: Component, hook: string) {
       }
     }
   }
+  // 通过 vm.$on('hook:mounted', () => {}) 后，给 _hasHookEvent 标记为true
+  // 性能优化  
   if (vm._hasHookEvent) {
     vm.$emit('hook:' + hook)
   }

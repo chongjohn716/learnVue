@@ -23,6 +23,9 @@ export default {
     // this.$on('hook:mounted', () => {
     //   console.log('123')
     // })
+  },
+  mounted () {
+    console.log('app mounted')
   }
 }
 </script>
