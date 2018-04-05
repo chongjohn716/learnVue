@@ -142,6 +142,7 @@ export function eventsMixin (Vue: Class<Component>) {
     let cbs = vm._events[event]
     if (cbs) {
       /*将类数组的对象转换成数组*/
+      // TODO: cbs 本就是数组，为何还调用 toArray
       cbs = cbs.length > 1 ? toArray(cbs) : cbs
       const args = toArray(arguments, 1)
       /*遍历执行*/

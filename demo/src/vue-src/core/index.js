@@ -9,5 +9,6 @@ Object.defineProperty(Vue.prototype, '$isServer', {
 })
 
 Vue.version = '__VERSION__'
-
+console.log(Vue)
+debugger
 export default Vue
