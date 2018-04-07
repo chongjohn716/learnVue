@@ -208,7 +208,7 @@ const defaultStrat = function (parentVal: any, childVal: any): any {
  * Validate component names
  */
 /**
- * 检查组件名是否为原生html标签
+ * 检查组件名是否为内置组件（slot component）或原生html标签
  */
 function checkComponents(options: Object) {
   for (const key in options.components) {

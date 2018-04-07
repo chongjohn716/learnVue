@@ -10,7 +10,10 @@ export function initEvents (vm: Component) {
   /*这个bool标志位来表明是否存在钩子，而不需要通过哈希表的方法来查找是否有钩子，这样做可以减少不必要的开销，优化性能。*/
   vm._hasHookEvent = false
   // init parent attached events
-  /*初始化父组件attach的事件*/
+  /**
+   * 初始化父组件对子组件监听的事情
+   * 如: <Child @click="handleClick" />
+   */
   const listeners = vm.$options._parentListeners
   if (listeners) {
     updateComponentListeners(vm, listeners)

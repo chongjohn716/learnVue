@@ -30,8 +30,6 @@ export function validateProp (
     /*当父组件没有传入prop并且default中也不存在该prop时，赋值为false*/
     if (absent && !hasOwn(prop, 'default')) {
       value = false
-      // TODO: !isType(String, prop.type)!isType(String, prop.type) 处理多种类型
-      // type: [Boolean, String]
       // 处理 <comp disabled /> 这种情况
     } else if (!isType(String, prop.type) && (value === '' || value === hyphenate(key))) {
       value = true

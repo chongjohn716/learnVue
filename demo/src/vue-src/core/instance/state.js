@@ -97,9 +97,10 @@ function initProps (vm: Component, propsOptions: Object) {
       }
       defineReactive(props, key, value, () => {
         /*
-          由于父组件重新渲染的时候会充血prop的值，所以应该直接使用prop来作为一个data或者计算属性的依赖
+          由于父组件重新渲染的时候会重写prop的值，所以应该直接使用prop来作为一个data或者计算属性的依赖
           https://cn.vuejs.org/v2/guide/components.html#字面量语法-vs-动态语法
         */
+        // 对组件内重写prop做出警告
         if (vm.$parent && !observerState.isSettingProps) {
           warn(
             `Avoid mutating a prop directly since the value will be ` +
@@ -111,6 +112,7 @@ function initProps (vm: Component, propsOptions: Object) {
         }
       })
     } else {
+      // TODO
       defineReactive(props, key, value)
     }
     // static props are already proxied on the component's prototype
@@ -152,6 +154,7 @@ function initData (vm: Component) {
   while (i--) {
 
     /*保证data中的key不与props中的key重复，props优先，如果有冲突会产生warning*/
+    // 没有处理method于data.key重复的情况
     if (props && hasOwn(props, keys[i])) {
       process.env.NODE_ENV !== 'production' && warn(
         `The data property "${keys[i]}" is already declared as a prop. ` +
@@ -166,6 +169,7 @@ function initData (vm: Component) {
     }
   }
   // observe data
+  // TODO
   /*从这里开始我们要observe了，开始对数据进行绑定，这里有尤大大的注释asRootData，这步作为根数据，下面会进行递归observe进行对深层对象的绑定。*/
   observe(data, true /* asRootData */)
 }
@@ -241,6 +245,7 @@ export function defineComputed (target: any, key: string, userDef: Object | Func
   } else {
     /*get不存在则直接给空函数，如果存在则查看是否有缓存cache，没有依旧赋值get，有的话使用createComputedGetter创建*/
     sharedPropertyDefinition.get = userDef.get
+      // cache 废弃，相当于取值时每次直接运行get函数，与method无异
       ? userDef.cache !== false
         ? createComputedGetter(key)
         : userDef.get

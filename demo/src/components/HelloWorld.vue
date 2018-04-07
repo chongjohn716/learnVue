@@ -2,6 +2,9 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <input type="text" :value="msg" @input="onInput"/>
+    <h1>slots</h1>
+    <div>default: <slot></slot></div>
+    <div>default: <slot name="abc"></slot></div>
   </div>
 </template>
 
